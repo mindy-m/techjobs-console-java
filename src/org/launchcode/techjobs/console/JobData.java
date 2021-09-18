@@ -76,7 +76,7 @@ public class JobData {
 
             String aValue = row.get(column);
 
-            if (aValue.contains(value)) {
+            if (aValue.toUpperCase().contains(value.toUpperCase())) {
                 jobs.add(row);
             }
         }
@@ -84,6 +84,28 @@ public class JobData {
         return jobs;
     }
 
+    public static ArrayList<HashMap<String, String>> findByValue(String value) {
+        loadData();
+
+        //Create empty array list to hold the HashMap "rows" that contain value
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>();
+
+        //iterate through ArrayList of allJobs
+        for (HashMap<String, String> row : allJobs) {
+
+            //iterate through the keys of each HashMap
+            for (String key : row.keySet()) {
+                //if the key value contains the value, add it to our empty array List
+                String aValue = row.get(key);
+                if (aValue.toUpperCase().contains(value.toUpperCase())) {
+                    jobs.add(row);
+                    break;
+                }
+            }
+        }
+        //return the array list holding our jobs
+        return jobs;
+    }
     /**
      * Read in data from a CSV file and store it in a list
      */
